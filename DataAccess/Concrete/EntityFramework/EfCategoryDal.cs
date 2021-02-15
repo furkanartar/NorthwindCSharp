@@ -6,29 +6,29 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : IProductDal
+    public class EfCategoryDal : ICategoryDal
     {
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        public void Add(Category product)
         {
             throw new NotImplementedException();
         }
 
-        public Product Get(Expression<Func<Product, bool>> filter)
+        public void Delete(Category product)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(Product product)
+        public Category Get(Expression<Func<Category, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Product product)
+        public List<Category> GetAll(Expression<Func<Category, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Product product)
+        public void Update(Category product)
         {
             throw new NotImplementedException();
         }
