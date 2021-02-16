@@ -1,5 +1,4 @@
-﻿using Entities.Abstract;
-
+﻿using  Core.Entities;
 namespace Entities.Concrete
 {
     public class Product: IEntity
