@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Castle.DynamicProxy;
+using System;
 using System.Linq;
 using System.Reflection;
-using Castle.DynamicProxy;
 
 namespace Core.Utilities.Interceptors
 {
@@ -9,14 +9,13 @@ namespace Core.Utilities.Interceptors
     {
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {
-            var classAttributes = type.GetCustomAttributes<MethodInterceptionBaseAttribute>
+            var classAttributes = type.GetCustomAttributes<MethodInterceptionBaseAttribute>//Class'ın attirbute'larını getirir. Cache log vs.
                 (true).ToList();
-            var methodAttributes = type.GetMethod(method.Name)
+            var methodAttributes = type.GetMethod(method.Name)//Metot'un attirbute'larını getirir. Cache, log vs.
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             classAttributes.AddRange(methodAttributes);
-            //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
 
-            return classAttributes.OrderBy(x => x.Priority).ToArray();
+            return classAttributes.OrderBy(x => x.Priority).ToArray();//Attirbute'ları öncelik sırasına göre sıralar.
         }
     }
 }

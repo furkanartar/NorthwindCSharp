@@ -1,16 +1,16 @@
-﻿using System;
-using System.Linq;
-using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Interceptors;
 using FluentValidation;
+using System;
+using System.Linq;
 
 namespace Core.Aspects.Autofac.Validation
 {
     public class ValidationAspect : MethodInterception
     {
         private Type _validatorType;
-        public ValidationAspect(Type validatorType)
+        public ValidationAspect(Type validatorType)//gelen validatorType'ı kontrol ediyor.
         {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
@@ -20,12 +20,12 @@ namespace Core.Aspects.Autofac.Validation
             _validatorType = validatorType;
         }
 
-        protected override void OnBefore(IInvocation invocation)
+        protected override void OnBefore(IInvocation invocation)//doğrulama yapan metot.
         {
-            var validator = (IValidator)Activator.CreateInstance(_validatorType);
-            var entityType = _validatorType.BaseType.GetGenericArguments()[0];
-            var entities = invocation.Arguments.Where(t => t.GetType() == entityType);
-            foreach (var entity in entities)
+            var validator = (IValidator)Activator.CreateInstance(_validatorType);//_validatorType'ın reflection ile instance'ını oluşturuyor.
+            var entityType = _validatorType.BaseType.GetGenericArguments()[0];//_validatorType'ın base type'ını buluyoır onunda ilk çalışma tipini buluyor.
+            var entities = invocation.Arguments.Where(t => t.GetType() == entityType); //metot'un paremetlerine bakıyor entityType'a denk gelen parametreleri buluyor.
+            foreach (var entity in entities)//her paremetreyi tek tek doğruluyor.
             {
                 ValidationTool.Validate(validator, entity);
             }
