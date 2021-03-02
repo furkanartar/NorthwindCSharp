@@ -1,7 +1,4 @@
-﻿using Entities.Concrete;
-using System.Collections.Generic;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {
@@ -9,5 +6,8 @@ namespace Business.Constants
         public static string ProductNameInvalid = "Geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ProductsListed = "Ürünler listelendi";
+        public static string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürün olabilir";
+        public static string ProductNameAlreadyExists = "Bu isimde zaten bir ürün var";
+        internal static string CategoryLimitExceded = "Kategori sınırı aşıldı";
     }
 }

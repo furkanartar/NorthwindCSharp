@@ -1,7 +1,12 @@
-﻿namespace Core.Utilities.Results
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Core.Utilities.Results
 {
+    // Temel voidler için başlangıç
     public interface IResult
-    {//temel voidler için
+    {
         bool Success { get; }
         string Message { get; }
     }
