@@ -30,15 +30,10 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
-        //00.25 Dersteyiz
-        //Claim
-        [SecuredOperation("product.add,admin")]
+        [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-
-            //Aynı isimde ürün eklenemez
-            //Eğer mevcut kategori sayısı 15'i geçtiyse sisteme yeni ürün eklenemez. ve 
             IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName), 
                 CheckIfProductCountOfCategoryCorrect(product.CategoryId), CheckIfCategoryLimitExceded());
 
@@ -50,13 +45,9 @@ namespace Business.Concrete
             _productDal.Add(product);
 
             return new SuccessResult(Messages.ProductAdded);
-
-
-           
-            //23:10 Dersteyiz
         }
 
-
+        [SecuredOperation("product.add")]
         public IDataResult<List<Product>> GetAll()
         {
             if (DateTime.Now.Hour == 1)
