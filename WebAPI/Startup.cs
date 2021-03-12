@@ -29,13 +29,7 @@ namespace WebAPI
         {
             services.AddControllers();
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowOrigin",
-            //        builder => builder.WithOrigins("Domain/ler")
-            //    );
-
-            //});
+            services.AddCors();
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -70,7 +64,7 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseCors(builder => builder.WithOrigins("Domain/ler").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
